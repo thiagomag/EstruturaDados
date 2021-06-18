@@ -1,6 +1,7 @@
 package br.com.thiago.estruturas;
 
 import br.com.thiago.Pessoa;
+import br.com.thiago.exceptions.IndiceInexistenteException;
 import br.com.thiago.exceptions.PessoaNaoEcontradaException;
 import br.com.thiago.exceptions.TipoDeRemocaoException;
 
@@ -101,7 +102,11 @@ public class LinkedList implements EstruturaDados{ //nào pode deixar a calsse p
     @Override
     public void remover(int index) {
         Pessoa pessoa = this.getPessoa(index);
-        this.remover(pessoa);
+        if(pessoa != null) {
+            this.remover(pessoa);
+        } else {
+            throw new IndiceInexistenteException();
+        }
     }
 
     @Override

@@ -238,18 +238,22 @@ public class Aplicacao {
                 LinkedList linkedList = (LinkedList) estruturaDados;
                 System.out.println("Informe o nome da pessoa a ser removida.");
                 input.nextLine();
+                Pessoa pessoa = null;
                 final var nomePessoa = input.nextLine();
                 for (int i = 0; i < linkedList.tamanhoLinkedList(); i++) {
                     if (nomePessoa.equals(linkedList.getPessoa(i).getNome())) {
-                        Pessoa pessoa = linkedList.getPessoa(i);
+                        pessoa = linkedList.getPessoa(i);
                         estruturaDados.remover(pessoa);
                         break;
                     }
                 }
+                if(pessoa == null) {
+                    throw new PessoaNaoEcontradaException();
+                }
             } else {
                 estruturaDados.remover(new Pessoa());
             }
-        } catch (TipoDeRemocaoException | NullPointerException e) {
+        } catch (TipoDeRemocaoException | NullPointerException | PessoaNaoEcontradaException e) {
             System.err.println(e.getMessage());
         }
         Thread.sleep(2000);
@@ -264,7 +268,7 @@ public class Aplicacao {
             } else {
                 estruturaDados.remover(-1);
             }
-        } catch (TipoDeRemocaoException e) {
+        } catch (TipoDeRemocaoException | IndiceInexistenteException e) {
             System.err.println(e.getMessage());
         } catch (InputMismatchException e) {
             System.err.println("Informe um valor válido.");
