@@ -130,7 +130,7 @@ public class Aplicacao {
             List<String> lines = stream.collect(Collectors.toUnmodifiableList());
             for (int i = 0; i < lines.size(); i += 2) {
                 String nome = lines.get(i);
-                String idade = lines.get(i + 1);
+                int idade = Integer.parseInt(lines.get(i + 1));
                 estruturaDados.adicionar(new Pessoa(nome, idade));
             }
         }
@@ -141,9 +141,9 @@ public class Aplicacao {
         input.nextLine();
         String nome = input.nextLine();
         System.out.println("Qual a idade da pessoa?");
-        String idade = null;
+        int idade = 0;
         try {
-            idade = input.nextLine();
+            idade = input.nextInt();
         } catch (InputMismatchException e) {
             System.err.println("Informe um valor válido.");
         }
@@ -166,7 +166,7 @@ public class Aplicacao {
         return opc;
     }
 
-    private void opcaoAdicionarLinkedList(EstruturaDados estruturaDados, Scanner input, String nome, String idade) {
+    private void opcaoAdicionarLinkedList(EstruturaDados estruturaDados, Scanner input, String nome, int idade) {
         int n = opcaoMenuAdicionar(input);
         switch (n) {
             case 1:
